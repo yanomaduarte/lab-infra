@@ -13,27 +13,8 @@ O servidor gerencia a rede local distribuindo endereços IP automaticamente, rea
 
 ## 🏗️ Topologia da Rede
 
-*[🌐 Internet]
-       │
-       │ (NAT do VirtualBox)
-       ▼
- ┌──────────────────────────┐
- │      Ubuntu Server       │
- │   (Roteador / Firewall)  │
- │                          │
- │ WAN: enp0s3 (10.0.2.15)  │
- │ LAN: enp0s8 (192.168.20.1)
- └─────────────┬────────────┘
-               │
-               │ (Rede Interna: 192.168.20.0/24)
-               ▼
- ┌──────────────────────────┐
- │     Ubuntu Desktop       │
- │       (Cliente)          │
- │                          │
- │ IP: 192.168.20.100       │
- │ Gateway: 192.168.20.1    │
- └──────────────────────────┘*
+*<img width="449" height="476" alt="image" src="https://github.com/user-attachments/assets/f0d9271f-6849-42ce-b6f1-c604b86c7903" />
+*
 
 * **Internet:** Conexão externa via hypervisor (VirtualBox).
 * **Servidor (Roteador Linux):**
