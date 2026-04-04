@@ -1,2 +1,66 @@
-# lab-infra
-Laboratório de infraestrutura de redes: configuração de um roteador Linux com Ubuntu Server, NAT, DHCP e regras restritas de Firewall via iptables.
+# 🌐 Laboratório de Infraestrutura: Roteador Linux com NAT, DHCP e Firewall
+
+![Ubuntu](https://img.shields.io/badge/OS-Ubuntu_Server_24.04-orange?style=flat-square&logo=ubuntu)
+![Firewall](https://img.shields.io/badge/Security-iptables-blue?style=flat-square)
+![Network](https://img.shields.io/badge/Network-DHCP_%7C_NAT-success?style=flat-square)
+
+## 📌 Sobre o Projeto
+Este projeto documenta a construção e configuração de uma infraestrutura de rede simulada utilizando máquinas virtuais. O objetivo foi transformar um servidor Linux em um roteador funcional, aplicando conceitos essenciais de administração de redes e segurança.
+
+O servidor gerencia a rede local distribuindo endereços IP automaticamente, realizando a tradução de endereços (NAT) para acesso à internet e filtrando o tráfego de saída (Egress Filtering) sob o princípio de "Privilégio Mínimo" — onde tudo é bloqueado por padrão e apenas serviços essenciais são permitidos.
+
+---
+
+## 🏗️ Topologia da Rede
+
+*(Substitua este texto por uma imagem do seu diagrama de rede. Exemplo: `![Diagrama da Rede](link-da-imagem.png)`)*
+
+* **Internet:** Conexão externa via hypervisor (VirtualBox).
+* **Servidor (Roteador Linux):**
+    * `enp0s3`: Interface WAN (NAT / DHCP Client).
+    * `enp0s8`: Interface LAN (Rede Interna / IP Fixo: `192.168.20.1/24`).
+* **Cliente (Ubuntu Desktop):**
+    * `enp0s3`: Interface LAN (Rede Interna / IP Dinâmico via DHCP do Servidor).
+
+---
+
+## ⚙️ Tecnologias e Serviços Implementados
+
+* **Netplan:** Configuração declarativa de IP estático na interface local.
+* **isc-dhcp-server:** Servidor DHCP para entrega dinâmica de IPs no escopo `192.168.20.100` a `192.168.20.200`.
+* **IP Forwarding:** Roteamento ativado no Kernel do Linux (`sysctl`).
+* **iptables (Netfilter):** * **NAT (Masquerade):** Para permitir que a rede interna acesse a internet.
+    * **Stateful Firewall:** Permissão de tráfego ESTABLISHED e RELATED.
+    * **Egress Filtering:** Regras de saída restritas (Portas 53 UDP/TCP, 80 TCP e 443 TCP). Bloqueio de ICMP (Ping) para a internet.
+    * **iptables-persistent:** Para garantir que as regras sobrevivam à reinicialização do sistema.
+
+---
+
+## 📁 Estrutura do Repositório
+
+Neste repositório, você encontra os arquivos de configuração idênticos aos aplicados no servidor:
+
+- `/netplan/` -> Arquivo `.yaml` com as definições de interface.
+- `/dhcp/` -> Arquivos `dhcpd.conf` e `isc-dhcp-server` com o escopo da rede.
+- `/firewall/` -> Arquivo de texto contendo as regras aplicadas via `iptables`.
+
+---
+
+## 🧪 Validação e Testes (Evidências)
+
+Abaixo estão os testes realizados na máquina Cliente que comprovam a eficácia das regras aplicadas no servidor:
+
+### 1. Entrega de IP (DHCP) e Comunicação Local
+O cliente obteve sucesso ao receber o IP e pingar o Gateway da rede.
+*(Adicione aqui o print do comando `ip a` e do `ping 192.168.20.1`)*
+
+### 2. Resolução de Nomes e Navegação (NAT e Liberação DNS/HTTPS)
+Testes confirmam que o roteador mascara o IP da LAN e o firewall permite consultas DNS e requisições Web.
+*(Adicione aqui o print dos comandos `dig google.com` e `curl https://example.com`)*
+
+### 3. Bloqueio de Tráfego Não Autorizado
+Como o firewall segue a política padrão de DROP, requisições externas não autorizadas (como ICMP) são bloqueadas com sucesso, garantindo o Egress Filtering.
+*(Adicione aqui o print do `ping 8.8.8.8` falhando na máquina cliente)*
+
+---
+*Projeto desenvolvido para fins de estudo em infraestrutura de redes.*
