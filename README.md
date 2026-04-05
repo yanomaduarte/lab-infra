@@ -52,15 +52,15 @@ Abaixo estão os testes realizados na máquina Cliente que comprovam a eficácia
 
 ### 1. Entrega de IP (DHCP) e Comunicação Local
 O cliente obteve sucesso ao receber o IP e pingar o Gateway da rede.
-*(Adicione aqui o print do comando `ip a` e do `ping 192.168.20.1`)*
+<img width="1058" height="692" alt="image" src="https://github.com/user-attachments/assets/f8d01ced-00f1-4c7c-84f4-abbf35b6e09e" />
 
 ### 2. Resolução de Nomes e Navegação (NAT e Liberação DNS/HTTPS)
 Testes confirmam que o roteador mascara o IP da LAN e o firewall permite consultas DNS e requisições Web.
-*(Adicione aqui o print dos comandos `dig google.com` e `curl https://example.com`)*
+<img width="1205" height="422" alt="image" src="https://github.com/user-attachments/assets/d06bbd9a-e366-45f9-a6d9-27e0eb0570b0" />
 
 ### 3. Bloqueio de Tráfego Não Autorizado
 Como o firewall segue a política padrão de DROP, requisições externas não autorizadas (como ICMP) são bloqueadas com sucesso, garantindo o Egress Filtering.
-*(Adicione aqui o print do `ping 8.8.8.8` falhando na máquina cliente)*
+<img width="490" height="91" alt="image" src="https://github.com/user-attachments/assets/872a1e7b-5375-4785-a835-bd20718cd89e" />
 
 ---
 *Projeto desenvolvido para fins de estudo em infraestrutura de redes.*
