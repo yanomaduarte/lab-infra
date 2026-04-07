@@ -61,6 +61,7 @@ Testes confirmam que o roteador mascara o IP da LAN e o firewall permite consult
 
 ### 3. Bloqueio de Tráfego Não Autorizado
 Como o firewall segue a política padrão de DROP, requisições externas não autorizadas (como ICMP) são bloqueadas com sucesso, garantindo o Egress Filtering.
+
 <img width="490" height="91" alt="image" src="https://github.com/user-attachments/assets/872a1e7b-5375-4785-a835-bd20718cd89e" />
 
 ---
