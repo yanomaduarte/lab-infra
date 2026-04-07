@@ -1,4 +1,5 @@
 # 🌐 Laboratório de Infraestrutura: Roteador Linux com NAT, DHCP e Firewall
+# Yanomã Duarte e Francisco Fernando
 
 ![Ubuntu](https://img.shields.io/badge/OS-Ubuntu_Server_24.04-orange?style=flat-square&logo=ubuntu)
 ![Firewall](https://img.shields.io/badge/Security-iptables-blue?style=flat-square)
